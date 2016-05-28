@@ -32,6 +32,7 @@ Interval `r steps_per_interval[which.max(steps_per_interval$avg_steps), ]$interv
   
 ## Imputing missing values
 Number of rows with NAs: `r nrow(filter(activity, is.na(steps)))`  
+I'm going to immpute missing values by using avg on the interval, join it to a new activity dataset and choose to use the avg of the interval in the case of an NA value.
 ```{r impute}
 avg_interval <- summarise(group_by(activity, interval), avg = mean(steps, na.rm = TRUE))
 activity_with_avgs <- left_join(activity, avg_interval, by = c("interval"))

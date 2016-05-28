@@ -62,6 +62,7 @@ Interval 835 has the max avg steps of 206.1698113.
   
 ## Imputing missing values
 Number of rows with NAs: 2304  
+I'm going to immpute missing values by using avg on the interval, join it to a new activity dataset and choose to use the avg of the interval in the case of an NA value.
 
 ```r
 avg_interval <- summarise(group_by(activity, interval), avg = mean(steps, na.rm = TRUE))

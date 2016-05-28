@@ -152,7 +152,8 @@ ggplot(steps_per_interval, aes(interval, avg_steps)) + geom_line() </code></pre>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
-<p>Number of rows with NAs: 2304</p>
+<p>Number of rows with NAs: 2304<br />
+I’m going to immpute missing values by using avg on the interval, join it to a new activity dataset and choose to use the avg of the interval in the case of an NA value.</p>
 <pre class="r"><code>avg_interval &lt;- summarise(group_by(activity, interval), avg = mean(steps, na.rm = TRUE))
 activity_with_avgs &lt;- left_join(activity, avg_interval, by = c(&quot;interval&quot;))
 imputed_activity &lt;- mutate(activity_with_avgs, steps = ifelse(is.na(steps), avg, steps))
